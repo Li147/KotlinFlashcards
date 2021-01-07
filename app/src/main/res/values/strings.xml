@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Kotlin Flashcards</string>
+    <string name="notes_title">Edit text</string>
+    <string name="notes_desc">enter description here</string>
+</resources>

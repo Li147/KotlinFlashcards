@@ -3,7 +3,7 @@ package com.example.kotlinflashcards
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.kotlinflashcards.adapter.FlashcardAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         var numberOfColumns = 2
 
         rv_recyclerView.layoutManager = GridLayoutManager(this, 2)
-        rv_recyclerView.adapter = RecyclerAdapter(titlesList, descList)
+        rv_recyclerView.adapter = FlashcardAdapter(titlesList, descList)
     }
 
     private fun addToList(title: String, description: String) {

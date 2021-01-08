@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.io.Serializable
 
 @Entity
-class Flashcards: Serializable {
+class Flashcard: Serializable {
 
     @PrimaryKey(autoGenerate = true)
     var id:Int? = null

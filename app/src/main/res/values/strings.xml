@@ -3,4 +3,5 @@
     <string name="notes_title">Edit text</string>
     <string name="notes_desc">enter description here</string>
     <string name="search">Search your flashcards</string>
+    <string name="storage_permission_text">This app needs access to your storage.</string>
 </resources>

@@ -5,12 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.kotlinflashcards.adapter.FlashcardAdapter
 import com.example.kotlinflashcards.database.FlashcardDatabase
 import com.example.kotlinflashcards.entities.Flashcard
+import kotlinx.android.synthetic.main.fragment_create_card.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.item_rv_card.*
+import kotlinx.android.synthetic.main.item_rv_card.view.*
 import kotlinx.coroutines.launch
 import java.util.*
 import kotlin.collections.ArrayList
@@ -51,7 +55,7 @@ class HomeFragment : BaseFragment() {
 
         launch {
             context?.let {
-                var cards = FlashcardDatabase.getDatabase(it).flashcardDao().getAllNotes()
+                var cards = FlashcardDatabase.getDatabase(it).flashcardDao().getAllCards()
                 adapter!!.setData(cards)
                 arrFlashcards = cards as ArrayList<Flashcard>
                 rv_recyclerView.adapter = adapter
@@ -59,6 +63,7 @@ class HomeFragment : BaseFragment() {
         }
 
         adapter!!.setOnClickListener(onClicked)
+        adapter!!.setOnLongClickListener(onLongClicked)
 
         // button listener
         fab_createNote.setOnClickListener {
@@ -87,17 +92,32 @@ class HomeFragment : BaseFragment() {
         })
     }
 
-    private val onClicked = object :FlashcardAdapter.OnItemClickListener{
-        override fun onClicked(notesId: Int) {
+    // when you click on flashcard, swap between card title and text
+    private val onClicked = object : FlashcardAdapter.OnItemClickListener {
+        override fun onClicked(notesId: Int, view: View) {
+            if (view.tv_cardTitle.visibility == View.VISIBLE){
+                view.tv_cardDetails.visibility = View.VISIBLE
+                view.tv_cardTitle.visibility = View.INVISIBLE
+            } else {
+                view.tv_cardDetails.visibility = View.INVISIBLE
+                view.tv_cardTitle.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    // when you long click on flashcard
+    private val onLongClicked = object : FlashcardAdapter.OnItemLongClickListener{
+        override fun onLongClicked(notesId: Int): Boolean {
             var fragment : Fragment
             var bundle = Bundle()
-            bundle.putInt("noteId",notesId)
+            bundle.putInt("cardId", notesId)
             fragment = CreateCardFragment.newInstance()
             fragment.arguments = bundle
 
             replaceFragment(fragment,false)
-        }
 
+            return true
+        }
     }
 
     fun replaceFragment(fragment: Fragment, isTransition: Boolean){

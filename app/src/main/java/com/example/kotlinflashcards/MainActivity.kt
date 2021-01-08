@@ -2,37 +2,33 @@ package com.example.kotlinflashcards
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.kotlinflashcards.adapter.FlashcardAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
-    private var titlesList = mutableListOf<String>()
-    private var descList = mutableListOf<String>()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        postToList()
-
-        var numberOfColumns = 2
-
-        rv_recyclerView.layoutManager = GridLayoutManager(this, 2)
-        rv_recyclerView.adapter = FlashcardAdapter(titlesList, descList)
+        replaceFragment(HomeFragment.newInstance(),false)
     }
 
-    private fun addToList(title: String, description: String) {
-        titlesList.add(title)
-        descList.add(description)
+    private fun replaceFragment(fragment: Fragment, isTransition: Boolean){
+        val fragmentTransition = supportFragmentManager.beginTransaction()
 
+        if (isTransition){
+            fragmentTransition.setCustomAnimations(android.R.anim.slide_out_right,android.R.anim.slide_in_left)
+        }
+        fragmentTransition.add(R.id.frame_layout,fragment).addToBackStack(fragment.javaClass.simpleName).commit()
     }
 
-    private fun postToList() {
-        for (i in 1..25) {
-            addToList("Title $i", "Description $i")
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val fragments = supportFragmentManager.fragments
+        if (fragments.size == 0){
+            finish()
         }
     }
-
 }

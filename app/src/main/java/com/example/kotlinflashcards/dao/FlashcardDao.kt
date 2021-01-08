@@ -7,20 +7,20 @@ import com.example.kotlinflashcards.entities.Flashcard
 interface FlashcardDao {
 
     @Query("SELECT * FROM flashcard ORDER BY id DESC")
-    suspend fun getAllNotes() : List<Flashcard>
+    suspend fun getAllCards() : List<Flashcard>
 
     @Query("SELECT * FROM flashcard WHERE id =:id")
-    suspend fun getSpecificNote(id:Int) : Flashcard
+    suspend fun getSpecificCard(id:Int) : Flashcard
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNotes(note:Flashcard)
+    suspend fun insertCards(note:Flashcard)
 
     @Delete
-    suspend fun deleteNote(note:Flashcard)
+    suspend fun deleteCard(note:Flashcard)
 
     @Query("DELETE FROM flashcard WHERE id =:id")
-    suspend fun deleteSpecificNote(id:Int)
+    suspend fun deleteSpecificCard(id:Int)
 
     @Update
-    suspend fun updateNote(note:Flashcard)
+    suspend fun updateCard(note:Flashcard)
 }

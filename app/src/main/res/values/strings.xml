@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Kotlin Flashcards</string>
-    <string name="notes_title">Edit text</string>
-    <string name="notes_desc">enter description here</string>
+    <string name="notes_title">Edit card title</string>
+    <string name="notes_desc">Edit card content</string>
     <string name="search">Search your flashcards</string>
     <string name="storage_permission_text">This app needs access to your storage.</string>
 </resources>

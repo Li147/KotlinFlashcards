@@ -13,6 +13,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/ic_back"
+        app:tint="@color/ColorWhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,6 +24,7 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/ic_confirm"
+        app:tint="@color/ColorWhite"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,6 +36,7 @@
         android:background="@null"
         android:ellipsize="end"
         android:hint="@string/notes_title"
+        android:textAlignment="center"
         android:inputType="text"
         android:maxLines="1"
         android:textColor="@color/ColorWhite"
